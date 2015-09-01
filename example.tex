@@ -1,0 +1,100 @@
+\documentclass[12pt,landscape]{report}
+\usepackage{cmap}
+\usepackage[T1,T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{geometry}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{array}
+
+\geometry{left=1cm}
+\geometry{right=1cm}
+\geometry{top=2cm}
+\geometry{bottom=2cm}
+
+\input defines.tex
+\input colors.tex
+% \input colors_laser.tex           % changes all colors to white
+
+\begin{document}
+\pagenumbering{gobble}
+\centering
+
+% | => !{\vrule width 2pt}
+% \hline => \noalign{\hrule height 2pt}
+
+\begin{tabular}{@{}|c!{\vrule width 1.25pt}c|c|c|c|c|c|@{}}
+\hline
+~ &
+\textbf{Понедельник} &
+\textbf{Вторник} &
+\textbf{Среда} &
+\textbf{Четверг} &
+\textbf{Пятница} &
+\textbf{Суббота}
+\\ \noalign{\hrule height 1.25pt}
+%
+% 1 пара
+\ddd{1}{~9:00}{10:35} &
+
+\ppps{Обычная пара} &
+\ppps{Заполнитель} &
+\ppps{Мигающая пара} &
+\ppps{Две мигающих пары} &
+~ &
+~
+
+\\ \hline
+%
+% 2 пара
+\ddd{2}{10:50}{12:25} &
+
+\ppps{\texttt{\textbackslash ppp\\{\small\{Что\}\{Где\}\{Кто ведет\}}}} &
+\ppps{\texttt{\textbackslash ppps\\{\small\{Что\}}}} &
+\ppps{\texttt{\textbackslash pppf\\{\small\{Что\}\{Где\}\{Кто ведет\}\{Неч|Ч\}}}} &
+\ppps{\texttt{\textbackslash ppppp\\{\small\{Что1\}\{Где1\}\{Кто ведет1\}\\\{Что2\}\{Где2\}\{Кто ведет2\}}}} &
+~ &
+~
+
+
+\\ \hline\hline
+%
+% 3 пара
+\ddd{3}{13:30}{15:05} &
+
+\ppp{Что}{Где}{Кто ведет} &
+\ppps{Что} &
+\pppf{Что}{Где}{Кто ведет}{Неч|Ч} &
+\ppppp{Что1}{Где1}{Кто ведет1}{Что2}{Где2}{Кто ведет2} &
+~ &
+~
+
+\\ \hline
+%
+% 4 пара
+\ddd{4}{15:20}{16:55} &
+
+~ &
+~ &
+~ &
+~ &
+~ &
+~
+
+\\ \hline
+%
+% 5 пара
+\ddd{5}{17:05}{18:40} &
+
+\blue \ppps{\texttt{\textbackslash blue}} &
+\green \ppps{\texttt{\textbackslash green}} &
+\orange \ppps{\texttt{\textbackslash orange}} &
+\magenta \ppps{\texttt{\textbackslash magenta}} &
+\yellow \ppps{\texttt{\textbackslash yellow}} &
+\violet \ppps{\texttt{\textbackslash violet}}
+
+\\ \hline
+
+\end{tabular}
+
+\end{document}

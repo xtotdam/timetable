@@ -127,6 +127,6 @@ sympy-plots-for-*.tex/
 
 
 #############
-main.pdf
+*.pdf
 *~
 *.zip
