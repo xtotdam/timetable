@@ -1,0 +1,109 @@
+\newcommand{\ddd}[3]{
+	\begin{minipage}[c]{0.08\textwidth}
+		\centering
+		\vspace{0.7cm}
+		\textbf{\underline{#1 пара}}
+
+		\vspace{0.5cm}
+		#2\\#3
+		\vspace{0.7cm}
+	\end{minipage}
+}
+
+% Номера пар
+\newcommand{\ddda}[0]{\ddd{1}{~9:00}{10:35}}
+\newcommand{\dddb}[0]{\ddd{2}{10:50}{12:25}}
+\newcommand{\dddc}[0]{\ddd{3}{13:30}{15:05}}
+\newcommand{\dddd}[0]{\ddd{4}{15:20}{16:55}}
+\newcommand{\ddde}[0]{\ddd{5}{17:05}{18:40}}
+
+% Цвета клеток
+\newcommand{\blue}[0]{\cellcolor{cyan!20}}
+\newcommand{\green}[0]{\cellcolor{lime!35}}
+\newcommand{\orange}[0]{\cellcolor{orange!30}}
+\newcommand{\magen}[0]{\cellcolor{magenta!35}}
+\newcommand{\yell}[0]{\cellcolor{yellow!35}}
+
+% Для распечатки на лазерном принтере
+% \newcommand{\blue}[0]{\cellcolor{white!20}}
+% \newcommand{\green}[0]{\cellcolor{white!35}}
+% \newcommand{\orange}[0]{\cellcolor{white!30}}
+% \newcommand{\magen}[0]{\cellcolor{white!35}}
+% \newcommand{\yell}[0]{\cellcolor{white!35}}
+
+% Стандартная клетка: {Что}{Где}{Кто ведет}
+\newcommand{\ppp}[3]{
+	\begin{minipage}[c]{0.12\textwidth}
+		\centering
+		{\large #1}
+		\vspace{0.1cm}\hrule\vspace{0.18cm}
+		
+		{\small #2\\#3}
+	\end{minipage}
+}
+
+% Заполнитель: {Что}
+\newcommand{\ppps}[1]{
+	\begin{minipage}[c]{0.12\textwidth}
+		\centering
+		{\large #1}
+	\end{minipage}
+}
+
+% Некоторые часто встречающиеся пары
+% \newcommand{\pppnir}[0]{\ppps{Научно-исс\-ле\-до\-ва\-тель\-ская работа}}
+% \newcommand{\pppmil}[0]{\ppps{Военная подготовка}}
+% \newcommand{\pppsprak}[0]{\ppps{Специальный физический практикум}}
+% \newcommand{\pppmfk}[0]{\ppps{Меж\-фа\-куль\-тет\-ски\-е курсы}}
+
+\newcommand{\pppnir}[0]{\ppps{НИ/Р}}
+\newcommand{\pppmil}[0]{\ppps{В/П}}
+\newcommand{\pppsprak}[0]{\ppps{Практикум}}
+\newcommand{\pppmfk}[0]{\ppps{МФК}}
+
+\newsavebox\TBox
+\def\textoverline#1{\savebox\TBox{#1}%
+  \makebox[0pt][l]{#1}\rule[1.1\ht\TBox]{\wd\TBox}{0.4pt}}
+
+% Клетка с чётностью: {Что}{Где}{Кто ведет}{Неч|Ч}
+\newcommand{\pppf}[4]{
+	\begin{minipage}[c]{0.12\textwidth}
+		\centering
+		{\large #1}
+		\vspace{0.1cm}\hrule\vspace{0.18cm}
+	
+		{\small #2\\#3}
+		\vspace{-0.1cm}
+		\begin{flushright}
+			\small\textoverline{#4ётные недели}
+		\end{flushright}
+	\end{minipage}
+}
+
+
+\newcommand{\ppppp}[6]{
+	\begin{tabular}{c}
+		\begin{minipage}[c]{0.11\textwidth}
+			\centering
+			{\large #1}
+			\vspace{0.08cm}\hrule\vspace{0.08cm}
+		
+			{\small #2
+
+			\vspace{-0.08cm}#3}
+		\end{minipage}
+
+	\\ \noalign{\centering \vspace{0.1cm} \hrule height 1pt \vspace{0.1cm}}
+
+		\begin{minipage}[c]{0.11\textwidth}
+			\centering
+			{\large #4}
+			\vspace{0.08cm}\hrule\vspace{0.08cm}
+		
+			{\small #5
+
+			\vspace{-0.08cm}#6}
+		\end{minipage}
+	\end{tabular}
+
+}

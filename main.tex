@@ -1,0 +1,89 @@
+\documentclass[12pt,landscape]{report}
+\usepackage{cmap}
+\usepackage[T1,T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{geometry}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{array}
+
+\geometry{left=1cm}
+\geometry{right=1cm}
+\geometry{top=2cm}
+\geometry{bottom=2cm}
+
+\input defines.tex
+
+\begin{document}
+\pagenumbering{gobble}
+
+% | => !{\vrule width 2pt}
+% \hline => \noalign{\hrule height 2pt}
+
+\begin{tabular}{|c!{\vrule width 1.25pt}c|c|c|c|c|c|}
+\hline
+~ & \textbf{Понедельник} & \textbf{Вторник} & \textbf{Среда} & \textbf{Четверг} & \textbf{Пятница} & \textbf{Суббота} \\ \noalign{\hrule height 1.25pt}
+% 
+% 1 пара
+\ddda & 
+
+\blue\ppp{С/к по выбору}{4-30}{Брандт Н.Б.} & 			% пн
+\pppmil &												% вт
+\blue\ppp{Д/п}{4-30}{Манцызов Б.И.} &					% ср
+\pppnir & 												% чт
+~ & 													% пт
+\pppsprak 												% сб
+
+\\ \hline
+% 
+% 2 пара
+\dddb & 
+
+\pppnir & 												% пн
+\pppmil & 												% вт
+\blue\ppp{С/к по выбору}{5-36}{Салецкий А.М.} & 		% ср
+~ & 													% чт
+~ & 													% пт
+\pppsprak 												% сб
+
+\\ \hline\hline
+% 
+% 3 пара
+\dddc & 
+
+\pppnir & 												% пн
+\pppmil & 												% вт
+~ & 													% ср
+\orange\ppp{Английский язык}{?}{?} & 					% чт
+\blue\ppp{ДМП}{4-30}{Русаков В.С.} & 					% пт
+\blue\ppp{С/к по выбору}{4-30}{Тишин А.М.} 				% сб
+
+\\ \hline
+% 
+% 4 пара
+\dddd &
+
+\green\ppp{Экономика}{ЦФА}{Катихин О.В.} & 				% пн
+~ & 													% вт
+\yell\pppmfk & 											% ср
+~ & 													% чт
+~ & 													% пт
+~ 														% сб
+
+\\ \hline
+% 
+% 5 пара
+\ddde &
+
+~ & 													% пн
+~ & 													% вт
+\yell\pppmfk & 											% ср
+~ & 													% чт
+~ & 													% пт
+~														% сб
+
+\\ \hline
+
+\end{tabular}
+
+\end{document}
