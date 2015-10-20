@@ -1,45 +1,10 @@
-\documentclass[12pt,landscape]{report}
-\usepackage{cmap}
-\usepackage[T1,T2A]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage[russian]{babel}
-\usepackage{geometry}
-\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
-\usepackage{array}
-
-\geometry{left=1cm}
-\geometry{right=1cm}
-\geometry{top=2cm}
-\geometry{bottom=2cm}
-
-\input defines.tex
-\input colors.tex
-% \input colors_laser.tex           % changes all colors to white
-
-\begin{document}
-\pagenumbering{gobble}
-\centering
-
-% | => !{\vrule width 2pt}
-% \hline => \noalign{\hrule height 2pt}
-
-\begin{tabular}{@{}|c!{\vrule width 1.25pt}c|c|c|c|c|c|@{}}
-\hline
-~ &
-\textbf{Понедельник} &
-\textbf{Вторник} &
-\textbf{Среда} &
-\textbf{Четверг} &
-\textbf{Пятница} &
-\textbf{Суббота}
-\\ \noalign{\hrule height 1.25pt}
 %
 % 1 пара
 \ddd{1}{{\color{white}0}9:00}{10:35} &
 ~ &                                                                         % пн
 \pppmil &                                                                   % вт
 ~ &                                                                         % ср
-\blue \ppp{Мессбауэров\-ская~спектро\-скопия}{4-30}{Русаков В.С.} &    % чт
+\blue \ppp{Мессбауэров\-ская~спектро\-скопия}{4-30}{Русаков В.С.} &         % чт
 ~ &                                                                         % пт
 \pppsprak                                                                   % сб
 
@@ -90,10 +55,3 @@
 \ppps{~} &                                                                  % чт
 \ppps{~} &                                                                  % пт
 \ppps{~}                                                                    % сб
-
-\\ \hline
-
-\end{tabular}
-
-\vfill\hfill{\color{gray!50}\scriptsize https://github.com/xtotdam/timetable}
-\end{document}
