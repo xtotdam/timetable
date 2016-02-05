@@ -6,9 +6,7 @@ RM          = rm -rfv
 ALL_SUFFS   = pdf aux log out
 TMP_SUFFS   = aux log out
 
-.PHONY: all clean purge color wb
-
-all: timetable.pdf timetable-wb.pdf
+.PHONY: all clean purge color wb example
 
 data.tex: data.py
 	python3 data.py
@@ -23,16 +21,27 @@ timetable-wb.pdf: data.tex timetable-wb.tex defines.tex colors_laser.tex
 	( grep Rerun timetable-wb.log && ${LATEX} timetable-wb ) || echo "Done."
 	( grep Rerun timetable-wb.log && ${LATEX} timetable-wb ) || echo "Done."
 
+timetable-example.pdf: timetable-example.tex defines.tex colors.tex
+	${LATEX} timetable-example
+	( grep Rerun timetable-example.log && ${LATEX} timetable-example ) || echo "Done."
+	( grep Rerun timetable-example.log && ${LATEX} timetable-example ) || echo "Done."
+
 color: timetable.pdf
 	
 wb: timetable-wb.pdf
+
+example: timetable-example.pdf
+
+all: color wb
 
 # delete temporary files
 clean:
 	${RM} $(foreach suff, ${TMP_SUFFS}, timetable.${suff})
 	${RM} $(foreach suff, ${TMP_SUFFS}, timetable-wb.${suff})
+	${RM} $(foreach suff, ${TMP_SUFFS}, timetable-example.${suff})
 
 # delete everything except sources
 purge: clean
 	${RM} $(foreach suff, ${ALL_SUFFS}, timetable.${suff})
 	${RM} $(foreach suff, ${ALL_SUFFS}, timetable-wb.${suff})
+	${RM} $(foreach suff, ${ALL_SUFFS}, timetable-example.${suff})

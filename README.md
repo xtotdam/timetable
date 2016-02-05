@@ -45,4 +45,6 @@ make purge		# удаляет все, кроме исходников
 
 ### Пример ###
 
+`make example`
+
 ![Example](https://cloud.githubusercontent.com/assets/5108025/12861910/e16ae94e-cc77-11e5-818c-b085ffb1aaf6.png)
