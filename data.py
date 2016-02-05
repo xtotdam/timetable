@@ -63,7 +63,12 @@ for i in range(5):
 	d = thursday[i] if thursday[i] else "\\ppps{~}"
 	e = friday[i] if friday[i] else "\\ppps{~}"
 	f = saturday[i] if saturday[i] else "\\ppps{~}"
-	end = ' \n\n\\\\ \\hline\\hline\n\n' if i != 4 else ''
+	if i == 1:
+		end = ' \n\n\\\\ \\hline\\hline\n\n'
+	elif i == 4:
+		end = ''
+	else:
+		end = ' \n\n\\\\ \\hline\n\n'
 
 	out.write(numbers[i] + ' &\n' +
 			a + ' &\n' + b + ' &\n' + c + ' &\n' + d + ' &\n' + e + ' &\n' + f + end)
