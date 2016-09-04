@@ -8,7 +8,10 @@ TMP_SUFFS   = aux log out
 
 .PHONY: all clean purge color wb example
 
+all: color wb
+
 data.tex: data.py
+	# C:\Miniconda3\python.exe data.py
 	python3 data.py
 
 timetable.pdf: data.tex timetable.tex defines.tex colors.tex
@@ -32,8 +35,6 @@ wb: timetable-wb.pdf
 
 example: timetable-example.pdf
 
-all: color wb
-
 # delete temporary files
 clean:
 	${RM} $(foreach suff, ${TMP_SUFFS}, timetable.${suff})
@@ -42,6 +43,7 @@ clean:
 
 # delete everything except sources
 purge: clean
+	${RM} data.tex
 	${RM} $(foreach suff, ${ALL_SUFFS}, timetable.${suff})
 	${RM} $(foreach suff, ${ALL_SUFFS}, timetable-wb.${suff})
 	${RM} $(foreach suff, ${ALL_SUFFS}, timetable-example.${suff})
