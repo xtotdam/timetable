@@ -11,8 +11,8 @@ TMP_SUFFS   = aux log out
 all: color wb
 
 data.tex: data.py
-	# C:\Miniconda3\python.exe data.py
-	python3 data.py
+	C:\Miniconda3\python.exe data.py
+	#python3 data.py
 
 timetable.pdf: data.tex timetable.tex defines.tex colors.tex
 	${LATEX} timetable
