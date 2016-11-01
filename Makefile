@@ -6,13 +6,19 @@ RM          = rm -rfv
 ALL_SUFFS   = pdf aux log out
 TMP_SUFFS   = aux log out
 
+
+ifeq ($(OS),Windows_NT)
+	PYTHON3 = C:\Miniconda3\python.exe
+else
+	PYTHON3 = python3
+endif
+
 .PHONY: all clean purge color wb example
 
 all: color wb
 
 data.tex: data.py
-	C:\Miniconda3\python.exe data.py
-	#python3 data.py
+	${PYTHON3} data.py
 
 timetable.pdf: data.tex timetable.tex defines.tex colors.tex
 	${LATEX} timetable
