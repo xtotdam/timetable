@@ -12,6 +12,14 @@
 	\end{minipage}
 }
 
+% Стандартная клетка: \pppl{Что}{Где}{Кто ведет}
+\newcommand{\pppl}[3]{
+	\begin{minipage}[c]{0.12\textwidth}
+		\centering{#1}\vspace{0.1cm}\hrule\vspace{0.18cm}{\small #2\\#3}
+		% \centering{\large #1}\vfill\hrule\vspace{0.18cm}{\small #2\\#3}
+	\end{minipage}
+}
+
 % Заполнитель: \ppps{Что}
 \newcommand{\ppps}[1]{
 	\begin{minipage}[c]{0.12\textwidth}\centering{\large #1}\end{minipage}
@@ -35,6 +43,15 @@
 \newcommand{\pppf}[4]{
 	\begin{minipage}[c]{0.12\textwidth}
 		\centering{\large #1}\vspace{0.1cm}\hrule\vspace{0.18cm}{\small #2\\#3}
+		\vfill
+		\begin{flushright}\scriptsize\textoverline{#4ётные недели}\end{flushright}
+	\end{minipage}
+}
+
+% Клетка с чётностью с длинным названием: \pppfl{Что}{Где}{Кто ведет}{Неч|Ч}
+\newcommand{\pppfl}[4]{
+	\begin{minipage}[c]{0.12\textwidth}
+		\centering{#1}\vspace{0.1cm}\hrule\vspace{0.18cm}{\small #2\\#3}
 		\vfill
 		\begin{flushright}\scriptsize\textoverline{#4ётные недели}\end{flushright}
 	\end{minipage}
