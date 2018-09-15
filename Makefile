@@ -2,7 +2,7 @@ LATEX       = pdflatex
 BASH        = bash -c
 ECHO        = echo
 RM          = rm -rfv
-# TMP_SUFFS   = pdf aux bbl blg log dvi ps eps out toc lof lot dep 
+# TMP_SUFFS   = pdf aux bbl blg log dvi ps eps out toc lof lot dep
 ALL_SUFFS   = pdf aux log out
 TMP_SUFFS   = aux log out
 
@@ -21,12 +21,12 @@ data.tex: data.py
 	${PYTHON3} data.py
 
 timetable.pdf: data.tex timetable.tex defines.tex colors.tex
-	${LATEX} timetable
+	${LATEX} -quiet timetable
 	( grep Rerun timetable.log && ${LATEX} timetable ) || echo "Done."
 	( grep Rerun timetable.log && ${LATEX} timetable ) || echo "Done."
 
 timetable-wb.pdf: data.tex timetable-wb.tex defines.tex colors_laser.tex
-	${LATEX} timetable-wb
+	${LATEX} -quiet timetable-wb
 	( grep Rerun timetable-wb.log && ${LATEX} timetable-wb ) || echo "Done."
 	( grep Rerun timetable-wb.log && ${LATEX} timetable-wb ) || echo "Done."
 
@@ -36,7 +36,7 @@ timetable-example.pdf: timetable-example.tex defines.tex colors.tex
 	( grep Rerun timetable-example.log && ${LATEX} timetable-example ) || echo "Done."
 
 color: timetable.pdf
-	
+
 wb: timetable-wb.pdf
 
 example: timetable-example.pdf
