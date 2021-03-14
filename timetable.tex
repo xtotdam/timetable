@@ -1,43 +1,108 @@
-\documentclass[12pt,landscape]{report}
-\usepackage{cmap}
-\usepackage[T1,T2A]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage[english,russian]{babel}
+% !TeX TS-program = lualatex
+
+\documentclass[12pt]{report}
+
+\usepackage{fontspec}
+
+% from https://github.com/AndreyAkinshin/Russian-Phd-LaTeX-Dissertation-Template/
+\setmonofont{CMU Typewriter Text}
+\newfontfamily\cyrillicfonttt{CMU Typewriter Text}
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{CMU Serif}
+\newfontfamily\cyrillicfont{CMU Serif}
+\setsansfont{CMU Sans Serif}
+\newfontfamily\cyrillicfontsf{CMU Sans Serif}
+
+\usepackage{polyglossia}
+\setmainlanguage[babelshorthands=true]{russian}
+\setotherlanguage{english}
+
 \usepackage{geometry}
-\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
-\usepackage{array}
+\geometry{
+	a4paper,
+	landscape,
+	left=1cm,
+	right=1cm,
+	top=2cm,
+	bottom=2cm
+}
 
-\geometry{left=1cm}
-\geometry{right=1cm}
-\geometry{top=2cm}
-\geometry{bottom=2cm}
-
-\input defines.tex
-\input colors.tex
+\usepackage[usenames,dvipsnames,svgnames]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{math, calc, patterns}
 
 \begin{document}
+
 \pagenumbering{gobble}
 \centering
 
-% | => !{\vrule width 2pt}
-% \hline => \noalign{\hrule height 2pt}
+\tikzmath{
+	function cft(\hour, \min){return \hour * 60 + \min;};
+	function difftime(\h1, \m1, \h2, \m2) {return ((\h2 - \h1) * 60 + \m2 - \m1) / 60.;};
+	function t2f(\h, \m) {return \h + \m / 60.;};
+}
 
-\begin{tabular}{@{}|c!{\vrule width 1.25pt}c|c|c|c|c|c|@{}}
-\hline
-~ &
-\textbf{Понедельник} &
-\textbf{Вторник} &
-\textbf{Среда} &
-\textbf{Четверг} &
-\textbf{Пятница} &
-\textbf{Суббота}
-\\ \noalign{\hrule height 1.25pt}
+\tikzset{
+	nosep/.style={inner sep=0,outer sep=0},
+}
 
-\input data.tex
+\newcommand{\xunit}{4.5cm}
+\newcommand{\yunit}{2cm}
 
-\\ \hline
+\newcommand{\starthour}{8}
+\newcommand{\finishhour}{15}
 
-\end{tabular}
+\newcommand{\startdays}{1}
+\newcommand{\finishdays}{5}
 
-\vfill\hfill{\color{gray!50}\scriptsize https://github.com/xtotdam/timetable}
+\newcommand{\dayslevel}{8.5}
+
+\begin{tikzpicture}[x=\xunit,y=-\yunit]
+
+\begin{scope}[every node/.style={draw,above right,minimum width=\xunit,minimum height=1.7em,align=center,nosep}]
+	\node at (1, \dayslevel) {Понедельник};
+	\node at (2, \dayslevel) {Вторник};
+	\node at (3, \dayslevel) {Среда};
+	\node at (4, \dayslevel) {Четверг};
+	\node at (5, \dayslevel) {Пятница};
+%	\node at (6, \dayslevel) {Суббота};
+\end{scope}
+
+\foreach \x in {\starthour,...,\finishhour}
+{
+	\node[draw,below left,minimum height=\yunit,minimum width=2em,align=center] (hour-{\x}) at (1, \x) {\x}; 
+}
+
+\begin{scope}[every node/.style={draw,above left,minimum height=3em,minimum width=(1+35/60)*\yunit,align=center,nosep,
+		xshift=-2.3em,rotate=90}]
+	\node (p1) at (\startdays,9) 			{1 пара\\9:00 --- 10:35};
+	\node (p2) at (\startdays,10+50/60) 	{2 пара\\10:50 --- 12:25};
+	\node (p3) at (\startdays,13.5) 		{3 пара\\13:30 --- 15:05};
+%	\node (p4) at (\startdays,15+20/60) 	{4 пара\\15:20 --- 16:55};
+%	\node (p5) at (\startdays,17+5/60) 		{5 пара\\17:05 --- 18:40};
+\end{scope}
+
+\begin{scope}[ultra thick,black!20]
+	\foreach \x in {1,...,3}{
+		\fill[pattern=north east lines,nearly transparent] ( p\x.0 -| \startdays,0 ) rectangle ( p\x.180 -| \finishdays+1,0 );
+	}
+\end{scope}
+
+\foreach \x in {\starthour,...,\finishhour} \draw[black,dotted] (\startdays,\x) -- (\finishdays+1,\x);
+\draw[black!10] (\startdays,\finishhour+1) -- (\finishdays+1,\finishhour+1);
+\foreach \x in {2,...,6}{ \draw (\x,\dayslevel) -- (\x,\finishhour+1); }
+
+\begin{scope}[every node/.style={draw,below right,minimum width=\xunit,text width=\xunit,align=center,nosep}]
+
+\node[minimum height=3.5*\yunit,fill=pink!40] at (1,8.5) {\textbf{Практикум}\\[1em]Оптика\\Задачи 408, 410\\[1em]Гр. 207, 209};
+\node[minimum height=3.5*\yunit,fill=pink!40] at (4,8.5) {\textbf{Практикум}\\[1em]Оптика\\Задачи 147, 142, 152, 169, 413\\[1em]Гр. 204, 211};
+
+\node[dashed,minimum height={t2f(1,35)*\yunit},fill=yellow!30] at (3,9) {\textbf{Семинар}\\Введение в квантовую физику\\Группа 212};
+
+\end{scope}
+
+\draw[thick] (\startdays,\dayslevel) -- (\finishdays+1,\dayslevel);
+\draw[thick] (\startdays,\starthour) -- (\startdays,\finishhour+1);
+\end{tikzpicture}
+
 \end{document}
