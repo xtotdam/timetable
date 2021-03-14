@@ -3,7 +3,10 @@
 all: timetable.pdf
 
 timetable.pdf: timetable.tex
-	latexmk -lualatex timetable.tex
+	latexmk -lualatex $<
+
+timetable-example.pdf: timetable-example.tex
+	latexmk -lualatex $<
 
 # delete temporary files
 clean:
