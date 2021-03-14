@@ -50,10 +50,10 @@
 
 % Ширина и высота колонок и ячеек
 \newcommand{\xunit}{4.5cm}
-\newcommand{\yunit}{2cm}
+\newcommand{\yunit}{2.2cm}
 
 % Первый и последний час 
-\newcommand{\starthour}{8}
+\newcommand{\starthour}{9}
 \newcommand{\finishhour}{15}
 
 % Первый и последний день (1 -- 6)
@@ -61,7 +61,7 @@
 \newcommand{\finishdays}{5}
 
 % Уровень нижней границы полосы с названиями дней
-\newcommand{\dayslevel}{8.5}
+\newcommand{\dayslevel}{9}
 
 \begin{tikzpicture}[x=\xunit,y=-\yunit]
 
@@ -132,17 +132,35 @@
 % Собственно, пары
 \begin{scope}[every node/.style={draw,single,below right,fill=white,minimum width=\xunit,text width=\xunit,align=center,nosep}]
 
-\node[prac2,fill=pink!40] at (mon |- prac1) {
-	\textbf{Практикум}\\[1em]Оптика\\Задачи 408, 410\\[1em]Гр. 207, 209
+\node[fill=yellow!30] at (mon |- p1) {
+	\textbf{Обычная пара}\\[1em](Что)\\Где\\[1em]Какая группа
 };
 
-\node[prac2,fill=pink!40] at (thu |- prac1) {
-	\textbf{Практикум}\\[1em]Оптика\\Задачи 147, 142, 152, 169, 413\\[1em]Гр. 204, 211
+\node[dist,fill=orange!20] at (mon |- p2) {
+	\textbf{Дистанционная пара}
 };
 
-\node[dist,fill=yellow!30] at (wed |- p1) {
-	\textbf{Семинар}\\Введение в квантовую физику\\Группа 212
+\node[fill=magenta!15] at (mon |- 0,{t2f(14, 0)}) {
+	\textbf{Пара точно в 14:00}
 };
+
+\node[prac,fill=pink!40] at (tue |- p1) {
+	\textbf{Практикум}\\[1em]Что\\Где/какие задачи\\[1em]Какая группа
+};
+
+\node[greyedout] at (tue |- p3) {
+	\textbf{Нет пары}\\[1em]Почему?\\Загадка\dots
+};
+
+\node[fill=green!20] at (wed |- p1) {
+	\textbf{Мигающая пара}\\[0.3em]Где\\[0.3em]Какая группа\\\hfill {\scriptsize (Не)чётные недели}\hspace*{0.3em}
+};
+
+\node[fill=blue!10] (blink) at (thu |- p1) {
+	\textbf{Мигающая пара 1}\\Где\\Какая группа\\[0.2em]
+	\textbf{Мигающая пара 2}\\Где\\Какая группа\\
+};
+\draw (blink.0) -- (blink.180);
 
 \end{scope}
 
