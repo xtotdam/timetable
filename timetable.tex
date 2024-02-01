@@ -49,19 +49,23 @@
 \tikzset{nosep/.style={inner sep=0,outer sep=0}}
 
 % Ширина и высота колонок и ячеек
-\newcommand{\xunit}{4.5cm}
-\newcommand{\yunit}{2cm}
+\newcommand{\xunit}{3.8cm}
+\newcommand{\yunit}{1.7cm}
 
 % Первый и последний час 
-\newcommand{\starthour}{8}
-\newcommand{\finishhour}{15}
+\newcommand{\starthour}{9}
+\newcommand{\finishhour}{16}
 
 % Первый и последний день (1 -- 6)
 \newcommand{\startdays}{1}
-\newcommand{\finishdays}{5}
+\newcommand{\finishdays}{6}
+
+% Первая и последняя пара (1 -- 5)
+\newcommand{\startlesson}{1}
+\newcommand{\finishlesson}{4}
 
 % Уровень нижней границы полосы с названиями дней
-\newcommand{\dayslevel}{8.5}
+\newcommand{\dayslevel}{8.9}
 
 \begin{tikzpicture}[x=\xunit,y=-\yunit]
 
@@ -72,7 +76,7 @@
 	\node at (3, \dayslevel) {Среда};
 	\node at (4, \dayslevel) {Четверг};
 	\node at (5, \dayslevel) {Пятница};
-%	\node at (6, \dayslevel) {Суббота};
+	\node at (6, \dayslevel) {Суббота};
 \end{scope}
 
 % Левый столбец с часами
@@ -87,18 +91,25 @@
 	\node (p1) at (\startdays, {t2f( 9,  0)})	{1 пара\\ 9:00 --- 10:35};
 	\node (p2) at (\startdays, {t2f(10, 50)}) 	{2 пара\\10:50 --- 12:25};
 	\node (p3) at (\startdays, {t2f(13, 30)}) 	{3 пара\\13:30 --- 15:05};
-%	\node (p4) at (\startdays, {t2f(15, 20)}) 	{4 пара\\15:20 --- 16:55};
+%	\node (p3) at (\startdays, {t2f(12, 40)}) 	{3 пара\\12:40 --- 14:15};
+	\node (p4) at (\startdays, {t2f(15, 20)}) 	{4 пара\\15:20 --- 16:55};
 %	\node (p5) at (\startdays, {t2f(17,  5)}) 	{5 пара\\17:05 --- 18:40};
+
+
 \end{scope}
 
 % Заштрихованные полосы, соотвествующие парам
-\begin{scope}[ultra thick,black!20]
-	\foreach \x in {1,...,3}{
-		\fill[pattern=north east lines,nearly transparent] ( p\x.0 -| \startdays,0 ) rectangle ( p\x.180 -| \finishdays+1,0 );
+\begin{scope}[ultra thick,black!10]
+	\foreach \x in {\startlesson,...,\finishlesson}{
+		\fill[pattern=north east lines,opacity=0.3] ( p\x.0 -| \startdays,0 ) rectangle ( p\x.180 -| \finishdays+1,0 );
 	}
 \end{scope}
 
-\tikzmath{\fhp = \finishhour + 1; \sdp = \startdays + 1; \fdp = \finishdays + 1;}
+\tikzmath{
+	\fhp = \finishhour + 1; % bottom border
+	\sdp = \startdays + 1;  %
+	\fdp = \finishdays + 1; % right border
+}
 % Горизонтальные линии - границы часов
 \foreach \x in {\starthour,...,\fhp} {\draw[black,dotted] (\startdays, \x) -- (\fdp, \x);}
 % Вертикальные линии - границы дней
@@ -108,13 +119,15 @@
 	% одна пара по высоте (по умолчанию)
 	single/.style={minimum height={t2f(1, 35)*\yunit}},
 	% смена в практикуме = 3 часа 25 минут
-	prac/.style={minimum height={t2f(3, 25)*\yunit}},
+	prac325/.style={minimum height={t2f(3, 25)*\yunit}},
 	% ранняя смена чуть длиннее
-	prac2/.style={minimum height={t2f(3, 30)*\yunit}},
+	prac330/.style={minimum height={t2f(3, 30)*\yunit}},
 	% дистанционная пара
 	dist/.style={dashed},
 	% ``выключенная'' пара
 	greyedout/.style={text=black!50},
+	% ``мигающая'' пара
+	halfsize/.style={minimum height={t2f(0, 45)*\yunit}}
 }
 
 % 8:30 - ранняя смена практикума
@@ -125,24 +138,63 @@
 \coordinate (thu) at (4,0); \coordinate (fri) at (5,0); \coordinate (sat) at (6,0);
 
 % пары
-\coordinate (p1) at (0,{t2f( 9, 0)}); \coordinate (p2) at (0,{t2f(10,50)});
-\coordinate (p3) at (0,{t2f(13,30)}); \coordinate (p4) at (0,{t2f(15,20)});
-\coordinate (p5) at (0,{t2f(17, 5)});
+\coordinate (p1) at (0,{t2f( 9, 0)}); \coordinate (p2) at (0,{t2f(10, 50)});
+%\coordinate (p3) at (0,{t2f(12, 40)});
+\coordinate (p3) at (0,{t2f(13, 30)});
+\coordinate (p4) at (0,{t2f(15, 20)}); \coordinate (p5) at (0,{t2f(17, 5)});
+
+\coordinate (p15) at (0,{t2f( 9, 50)}); \coordinate (p25) at (0,{t2f(11, 40)});
+%\coordinate (p3) at (0,{t2f(12, 40)});
+\coordinate (p35) at (0,{t2f(14, 20)});
+\coordinate (p45) at (0,{t2f(16, 10)}); \coordinate (p55) at (0,{t2f(17, 55)});
+
+\coordinate (p3fnm) at (0,{t2f( 12, 30)});
 
 % Собственно, пары
 \begin{scope}[every node/.style={draw,single,below right,fill=white,minimum width=\xunit,text width=\xunit,align=center,nosep}]
 
-\node[prac2,fill=pink!40] at (mon |- prac1) {
-	\textbf{Практикум}\\[1em]Оптика\\Задачи 408, 410\\[1em]Гр. 207, 209
+% \node[style, ...] at (day |- time) {...}
+% style = single, dist, greyedout, prac325, prac330
+% day = mon, tue, wed, thu, fri, sat
+% time = p1, p2, p3, p4, p5, prac1, p3fnm
+
+\node[single] at (tue |- p1) {
+	\textbf{Лекция}\\ Механика\\ Клавсюк А.Л.\\ СФА
 };
 
-\node[prac2,fill=pink!40] at (thu |- prac1) {
-	\textbf{Практикум}\\[1em]Оптика\\Задачи 147, 142, 152, 169, 413\\[1em]Гр. 204, 211
+\node[halfsize] at (tue |- p25) {
+	\textbf{Лекция}\\ СФА
 };
 
-\node[dist,fill=yellow!30] at (wed |- p1) {
-	\textbf{Семинар}\\Введение в квантовую физику\\Группа 212
+\node[prac325, very thick, fill=pink!40] at (mon |- p3) {
+	\textbf{Практикум}\\[1em]Механика \\~\\~
 };
+
+\node[single, very thick, fill=green!7] at (mon |- p2) {
+	\textbf{Семинар}\\ Механика\\ 5-26
+};
+
+\node[single, very thick, fill=green!7] at (thu |- p3) {
+	\textbf{Семинар}\\ Механика\\ 5-27
+};
+
+\node[single, very thick, fill=green!7] at (sat |- p2) {
+	\textbf{Семинар}\\ Механика\\ 5-36
+};
+
+
+
+
+%%%%%%%%%%%
+
+%\node[single, fill=green!7] at (tue |- p1) {
+%	\textbf{Лекция}\\ Механика\\ СФА\\ Клавсюк А. Л.
+%};
+%
+%\node[single, fill=green!7] at (tue |- p4) {
+%	\textbf{Лекция}\\ Механика\\ СФА\\ Клавсюк А. Л. \\ {\footnotesize нечетные недели}
+%};
+
 
 \end{scope}
 
