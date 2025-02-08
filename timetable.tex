@@ -54,7 +54,7 @@
 
 % Первый и последний час 
 \newcommand{\starthour}{9}
-\newcommand{\finishhour}{16}
+\newcommand{\finishhour}{18}
 
 % Первый и последний день (1 -- 6)
 \newcommand{\startdays}{1}
@@ -62,7 +62,7 @@
 
 % Первая и последняя пара (1 -- 5)
 \newcommand{\startlesson}{1}
-\newcommand{\finishlesson}{4}
+\newcommand{\finishlesson}{5}
 
 % Уровень нижней границы полосы с названиями дней
 \newcommand{\dayslevel}{8.9}
@@ -93,7 +93,7 @@
 	\node (p3) at (\startdays, {t2f(13, 30)}) 	{3 пара\\13:30 --- 15:05};
 %	\node (p3) at (\startdays, {t2f(12, 40)}) 	{3 пара\\12:40 --- 14:15};
 	\node (p4) at (\startdays, {t2f(15, 20)}) 	{4 пара\\15:20 --- 16:55};
-%	\node (p5) at (\startdays, {t2f(17,  5)}) 	{5 пара\\17:05 --- 18:40};
+	\node (p5) at (\startdays, {t2f(17,  5)}) 	{5 пара\\17:05 --- 18:40};
 
 
 \end{scope}
@@ -118,10 +118,12 @@
 \tikzset{
 	% одна пара по высоте (по умолчанию)
 	single/.style={minimum height={t2f(1, 35)*\yunit}},
-	% смена в практикуме = 3 часа 25 минут
-	prac325/.style={minimum height={t2f(3, 25)*\yunit}},
-	% ранняя смена чуть длиннее
-	prac330/.style={minimum height={t2f(3, 30)*\yunit}},
+	% ранняя смена 1-2 пары чуть длиннее
+	prac12/.style={minimum height={t2f(3, 30)*\yunit}},
+	% смена в практикуме 3-4 пары = 3 часа 25 минут
+	prac34/.style={minimum height={t2f(3, 25)*\yunit}},
+	% смена 3-4-5 пары
+	prac345/.style={minimum height={t2f(5, 10)*\yunit}},
 	% дистанционная пара
 	dist/.style={dashed},
 	% ``выключенная'' пара
@@ -148,27 +150,32 @@
 \coordinate (p35) at (0,{t2f(14, 20)});
 \coordinate (p45) at (0,{t2f(16, 10)}); \coordinate (p55) at (0,{t2f(17, 55)});
 
+\coordinate (p1fnm) at (0,{t2f( 9, 0)});
+\coordinate (p2fnm) at (0,{t2f( 10, 45)});
 \coordinate (p3fnm) at (0,{t2f( 12, 30)});
 
 % Собственно, пары
 \begin{scope}[every node/.style={draw,single,below right,fill=white,minimum width=\xunit,text width=\xunit,align=center,nosep}]
 
 % \node[style, ...] at (day |- time) {...}
-% style = single, dist, greyedout, prac325, prac330
+% style = single, dist, greyedout, prac12, prac34, halfsize
 % day = mon, tue, wed, thu, fri, sat
 % time = p1, p2, p3, p4, p5, prac1, p3fnm
 
-\node[single, fill=blue!7] at (mon |- p1) {\textbf{Лекция}\\ Общая физика\\ 229 ФНМ};
-\node[single, fill=blue!7] at (wed |- p1) {\textbf{Лекция}\\ Общая физика\\ 229 ФНМ};
-\node[single, fill=yellow!7] at (thu |- p1) {\textbf{Семинар}\\ Общая физика\\ 229 ФНМ};
+\node[single, fill=blue!7] at (wed |- p1fnm) {\textbf{Лекция}\\ Общая физика\\ ~~~ ФНМ};
+\node[single, fill=blue!7] at (thu |- p2fnm) {\textbf{Лекция}\\ Общая физика\\ ~~~ ФНМ};
+\node[single, fill=blue!7] at (thu |- p3fnm) {\textbf{Семинар}\\ Общая физика\\ ~~~ ФНМ};
 
-\node[single, fill=green!7] at (thu |- p4) {\textbf{Семинар}\\ Молекулярная физика\\ 5-25};
-\node[single, fill=green!7] at (fri |- p2) {\textbf{Семинар}\\ Молекулярная физика\\ 5-52};
+\node[single,dashed] at (tue |- p2) {\textbf{Семинар}\\ Оптика\\215\\ 5-26 Ю};
+\node[single,dashed] at (sat |- p3) {\textbf{Семинар}\\ Оптика\\215\\ 5-40 Ю};
 
-\node[single] at (tue |- p1) {\textbf{Лекция}\\ Молекулярная физика\\ Клавсюк А. Л.\\ СФА};
-\node[single] at (sat |- p1) {\textbf{Лекция}\\ Молекулярная физика\\ Клавсюк А. Л.\\ СФА};
+\node[single,prac12, fill=red!7] at (mon |- p1) {\textbf{Практикум \\Оптика}\\ гр. 215, 217};
 
-\node[single,prac325, fill=red!7] at (fri |- p3) {\textbf{Спецпрактикум для 3 курса}\\ 4-28 ?};
+
+%\node[single,dashed] at (tue |- p1) {\textbf{Лекция}\\ Молекулярная физика\\ Клавсюк А. Л.\\ СФА};
+%\node[single,dashed] at (sat |- p1) {\textbf{Лекция}\\ Молекулярная физика\\ Клавсюк А. Л.\\ СФА};
+%
+\node[single,single, fill=yellow!7] at (mon |- p5) {\textbf{Спецпрактикa для 3 курса}\\ 4-28};
 
 
 %%%%%%%%%%%
